@@ -1,0 +1,112 @@
+.close-terminal {display:inline-block;*display:inline;cursor:pointer;}
+.close-terminal:after {display: inline-block;content: "\00d7"; font-size:35pt;color:#F9B339;}
+/* https://jsfiddle.net/heeehong/2dvL65ao/9/ */
+.term-info {
+	color:#919191;
+}
+.terminal-content {
+  position: fixed;
+  top: -100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0,0,0,.9);
+  display: block;
+  height: 100%;
+  z-index: 9;
+}
+
+.terminal-item {
+  margin: 20px auto;
+  width:800px;
+}
+
+@keyframes showTerm {
+  from {
+    top: -100%;
+  }
+  to {
+    top: 0;
+  }
+}
+
+@-webkit-keyframes showTerm {
+  from {
+    top: -100%;
+  }
+  to {
+    top: 0;
+  }
+}
+
+@-moz-keyframes showTerm {
+  from {
+    top: -100%;
+  }
+  to {
+    top: 0;
+  }
+}
+
+@-o-keyframes showTerm {
+  from {
+    top: -100%;
+  }
+  to {
+    top: 0;
+  }
+}
+
+.showTerm {
+  -webkit-animation: showTerm 1s ease forwards;
+  -moz-animation: showTerm 1s ease forwards;
+  -o-animation: showTerm 1s ease forwards;
+  animation: showTerm 1s ease forwards;
+}
+
+@keyframes hideTerm {
+  from {
+    top: 0;
+  }
+  to {
+    top: -100%;
+  }
+}
+
+@-webkit-keyframes hideTerm {
+  from {
+    top: 0;
+  }
+  to {
+    top: -100%;
+  }
+}
+
+@-moz-keyframes hideTerm {
+  from {
+    top: 0;
+  }
+  to {
+    top: -100%;
+  }
+}
+
+@-o-keyframes hideTerm {
+  from {
+    top: 0;
+  }
+  to {
+    top: -100%;
+  }
+}
+
+.hideTerm {
+  -webkit-animation: hideTerm 1s ease forwards;
+  -moz-animation: hideTerm 1s ease forwards;
+  -o-animation: hideTerm 1s ease forwards;
+  animation: hideTerm 1s ease forwards;
+}
+
+.hidden {
+  display: none;
+}

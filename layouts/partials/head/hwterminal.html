@@ -1,0 +1,22 @@
+<div class="terminal-content hideTerm hidden">
+  <div class="terminal-item" style="text-align:right;"><div class="close-terminal"></div></div>
+  <div id="terminal" class="terminal-item"></div>
+  <div class="terminal-item term-info"><br/></div>
+  <div class="terminal-item term-info"><a href="https://hwantage.github.io/posts/fake-terminal/">🔗 Xterm.js 를 이용한 fake terminal 웹 제작 방법 포스트 확인</a></div>
+  <div class="terminal-item term-info"><a href="https://github.com/hwantage/fake-terminal.git">🔗 소스 다운로드</a></div>
+</div>
+
+{{ $cssCode := resources.Get "css/hwterminal.css" | minify }}
+<link rel="stylesheet" href="{{ $cssCode.RelPermalink }}?{{ now.Unix }}" />
+<script>
+/* https://codepen.io/alvarotrigo/pen/gOvpwxJ */
+window.addEventListener('load', function() {
+  var btnClose = document.querySelector('.close-terminal');
+  btnClose.addEventListener('click', function() {
+    var termContent = document.querySelector('.terminal-content');
+    termContent.classList.toggle('showTerm');
+    termContent.classList.toggle('hideTerm');
+    termContent.classList.remove('hidden');
+  });
+});
+</script>

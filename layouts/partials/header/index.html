@@ -1,0 +1,14 @@
+<header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+  {{ partial "header/avatar" . }}
+  
+  <div class="flex flex-col gap-5">
+    {{ partial "header/title" . }} 
+    {{ partial "header/nav" . }}
+	<form action="/search/" style="margin-top:-20px;">
+        <div class="search-bar"><input type="search" id="search-query" name="q" placeholder="search phrase" style="color:black;border: 0;border-radius: 15px;outline: none;padding-left: 10px;background-color: rgb(233, 233, 233);padding-right:8px; height:33px;"/></div>
+    </form>
+  </div>
+  {{- if not .Site.IsServer -}}
+      {{ partial "header/google_analytics" . }}
+  {{- end -}}
+</header>

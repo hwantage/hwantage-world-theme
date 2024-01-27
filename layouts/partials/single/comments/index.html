@@ -1,0 +1,38 @@
+{{ if .IsPage }}
+  <!-- 같은 카테고리의 글 목록 -->
+  {{ with .NextInSection }}
+    <a href="{{ .Permalink }}">다음 글: {{ .Title }}</a>
+  {{ end }}
+  
+  {{ with .PrevInSection }}
+    <a href="{{ .Permalink }}">이전 글: {{ .Title }}</a>
+  {{ end }}
+  
+  <!-- 같은 카테고리의 글 목록 -->
+  {{ $related := .Site.RegularPages.RelatedIndices . "tags"  | first 5 }}
+  {{ with $related }}
+  <h3>See Also</h3>
+  <ul>
+	{{ range . }}
+	  <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+	{{ end }}
+  </ul>
+  {{ end }}
+	
+  <!-- giscus -->
+  {{ if .Site.Params.giscus.enable }}
+    {{ partial "single/comments/giscus" . }}
+  {{ end }}
+
+  <!-- disqus -->
+  {{ if .Site.Params.disqusShortname }}
+    {{ partial "single/comments/disqus" . }}
+  {{ end }}
+  <script src="https://utteranc.es/client.js"
+        repo="hwantage/hwantage.github.io"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+  </script>  
+{{ end }}

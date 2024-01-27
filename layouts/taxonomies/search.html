@@ -1,0 +1,55 @@
+{{ define "main" }} <!-- https://gist.github.com/eddiewebb/735feb48f50f0ddd65ae5606a1cb41ae -->
+<div class="inner">
+    <article class="post-full post page no-image">
+        <header class="post-full-header">
+            <h1 class="post-full-title">Search Result</h1>
+        </header>
+        <section class="post-full-content" id="search-results">
+
+        </section>
+    </article>
+</div>
+<!--검색 결과가 출력되는 템플릿 search.js 에 의해서 다음과 같은 포맷으로 표시된다.-->
+<template id="search-result-template">
+    <div class="search_summary">
+        <h2 class="post-title no-text-decoration"><a class="search_link search_title" href=""></a></h2>
+        <p><em class="search_snippet"></em></p>
+        <small>
+            <table>
+                <tr class="search_iftags">
+                    <td><strong>Tags</strong></td>
+                    <td class="search_tags"></td>
+                </tr>
+                <tr class="search_ifcategories">
+                    <td><strong>Categories</strong></td>
+                    <td class="search_categories"></td>
+                </tr>
+            </table>
+        </small>
+    </div>
+</template>
+ 
+{{ $jsCopy2 := resources.Get "js/mark.js" | minify }}
+<script type="text/javascript" src="{{ $jsCopy2.RelPermalink }}?{{ now.Unix }}"></script>
+{{ $jsCopy1 := resources.Get "js/hansearch.js" | minify }}
+<script type="text/javascript" src="{{ $jsCopy1.RelPermalink }}?{{ now.Unix }}"></script>
+{{ $jsCopy3 := resources.Get "js/search.js" | minify}}
+<script type="text/javascript" src="{{ $jsCopy3.RelPermalink }}?{{ now.Unix }}"></script>
+<script type="text/javascript">
+    /* START :: keyup 이벤트 */
+    document.getElementById("search-query").addEventListener("keyup", function (event) {
+        const userInput = event.target.value;
+        console.log("userInput", userInput);
+        if (userInput.trim() != "")
+        {
+            hangleSearch(userInput);
+        }
+        else
+        {
+            document.getElementById("search-results").innerHTML =
+            '<br/><p class="no-results">Please enter a word or phrase above</p><p class="no-results">한글 초성 검색을 지원합니다. <br/><br/>ㄱ글 => 구글, 가글, 고글 등이 검색 결과에 나타납니다.</p>';
+        }
+    });
+    /* E N D :: keyup 이벤트 */ 
+</script>
+{{ end }}

@@ -1,0 +1,8 @@
+<footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    {{ partial "footer/copyright" . }}
+    {{ partial "footer/social" . }}
+</footer>
+{{ if (findRE "<pre" .Content 1) }}
+	{{ $jsCopy := resources.Get "js/copy-code-button.js" | minify }}
+	<script src="{{ $jsCopy.RelPermalink }}"></script>
+{{ end }}
