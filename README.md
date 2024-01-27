@@ -29,3 +29,5 @@ Based on **Lowkey Hugo theme**
 ## Blog link
 
 [https://hwantage.github.io](https://hwantage.github.io)
+
+![Hwantage world cover image](./cover.gif)
