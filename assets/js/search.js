@@ -23,10 +23,11 @@ function hangleSearch(searchQuery) {
       return response.json();
     })
     .then(function (data) {
-      let result = hanSearch(data, searchQuery); // 검색 수행
-      if (result.length > 0) {
+      const result = hansearch(data, searchQuery).mark("mark"); // 검색 수행
+	  
+      if (result.items.length > 0) {
         document.getElementById("search-results").innerHTML = "";
-        populateResults(result, searchQuery);
+        makeHtmlResults(result.items, searchQuery);
       } else {
         document.getElementById("search-results").innerHTML =
           '<br/><p class="no-results">No matches found</p><p class="no-results">한글 초성 검색을 지원합니다. <br/><br/>ㄱ글 => 구글, 가글, 고글 등이 검색 결과에 나타납니다.</p>';
@@ -34,36 +35,34 @@ function hangleSearch(searchQuery) {
     });
 }
 
-function populateResults(result, userInput) {
+function makeHtmlResults(result, userInput) {
   result.forEach(function (value, key) {
     if (value.type !== "posts") return;
 
     let contents = value.contents;
-    let snippet = "";
-    let snippetHighlights = [];
-    snippetHighlights.push(userInput);
+	let snippet = "";
+	let indexOfSentence = -1;
     if (snippet.length < 1) {
-      const escapedSearch = userInput.replace(/[()|[\]{}\\]/g, ""); // 특수 문자 이스케이프
-      var getSentenceByWordRegex = new RegExp(`[^.?!]*(?<=[.?\\s!])${escapedSearch}(?=[\\s.?!])[^.?!]*[.?!]`, "i");
+	  var getSentenceByWordRegex = /<mark>(.*?)<\/mark>/g;
       var maxTextLength = summaryInclude * 2;
-      // Index of the matched search term
-      var indexOfMatch = contents.toLowerCase().indexOf(userInput.toLowerCase());
       // Index of the first word of the sentence with the search term in it
-      var indexOfSentence = contents.indexOf(getSentenceByWordRegex.exec(contents));
+	  var match = getSentenceByWordRegex.exec(contents);
+
+	  if (match) {
+		indexOfSentence = contents.indexOf(match[0]);
+	  }
 
       var start;
       var cutStart = false;
       // Is the match in the result?
-      if (indexOfSentence + maxTextLength < indexOfMatch) {
-        // Make sure that the match is in the result
-        start = indexOfMatch;
+      if (indexOfSentence > summaryInclude) {
         // This bool is used to replace the first part with '...'
+		start = indexOfSentence - summaryInclude;
         cutStart = true;
       } else {
-        // Match is in view, even if we show the whole sentence
-        start = indexOfSentence;
-      }
-
+		  start = indexOfSentence - summaryInclude;
+	  }
+	  
       // Change end length to the text length if it is longer than
       // the text length to prevent problems
       var end = start + maxTextLength;
@@ -81,7 +80,6 @@ function populateResults(result, userInput) {
     }
     snippet += "…";
 
-    // Lifted from https://stackoverflow.com/posts/3700369/revisions
     var elem = document.createElement("textarea");
     elem.innerHTML = snippet;
     var decoded = elem.value;
@@ -91,24 +89,20 @@ function populateResults(result, userInput) {
     // Replace values
     frag.querySelector(".search_summary").setAttribute("id", "summary-" + key);
     frag.querySelector(".search_link").setAttribute("href", value.permalink);
-    frag.querySelector(".search_title").textContent = value.title;
-    frag.querySelector(".search_snippet").textContent = decoded;
+    frag.querySelector(".search_title").innerHTML = value.title;
+    frag.querySelector(".search_snippet").innerHTML = decoded;
     let tags = value.tags;
     if (tags) {
-      frag.querySelector(".search_tags").textContent = tags;
+      frag.querySelector(".search_tags").innerHTML = tags;
     } else {
       frag.querySelector(".search_iftags").remove();
     }
     let categories = value.categories;
     if (categories) {
-      frag.querySelector(".search_categories").textContent = categories;
+      frag.querySelector(".search_categories").innerHTML = categories;
     } else {
       frag.querySelector(".search_ifcategories").remove();
     }
-    snippetHighlights.forEach(function (snipvalue, snipkey) {
-      let markjs = new Mark(frag);
-      markjs.mark(snipvalue);
-    });
     document.getElementById("search-results").appendChild(frag);
   });
 }

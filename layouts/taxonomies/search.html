@@ -29,12 +29,10 @@
     </div>
 </template>
  
-{{ $jsCopy2 := resources.Get "js/mark.js" | minify }}
-<script type="text/javascript" src="{{ $jsCopy2.RelPermalink }}?{{ now.Unix }}"></script>
-{{ $jsCopy1 := resources.Get "js/hansearch.js" | minify }}
-<script type="text/javascript" src="{{ $jsCopy1.RelPermalink }}?{{ now.Unix }}"></script>
-{{ $jsCopy3 := resources.Get "js/search.js" | minify}}
-<script type="text/javascript" src="{{ $jsCopy3.RelPermalink }}?{{ now.Unix }}"></script>
+{{ $jsCopy := resources.Get "js/hansearch.js" | minify }}
+<script type="text/javascript" src="{{ $jsCopy.RelPermalink }}?{{ now.Unix }}"></script>
+{{ $jsCopy := resources.Get "js/search.js" | minify}}
+<script type="text/javascript" src="{{ $jsCopy.RelPermalink }}?{{ now.Unix }}"></script>
 <script type="text/javascript">
     /* START :: keyup 이벤트 */
     document.getElementById("search-query").addEventListener("keyup", function (event) {
