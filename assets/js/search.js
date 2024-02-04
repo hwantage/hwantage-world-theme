@@ -23,7 +23,7 @@ function hangleSearch(searchQuery) {
       return response.json();
     })
     .then(function (data) {
-      const result = hansearch(data, searchQuery).mark("mark"); // 검색 수행
+      const result = hansearch(data, searchQuery, ["title","tags","contents"]).mark("mark"); // 검색 수행
 	  
       if (result.items.length > 0) {
         document.getElementById("search-results").innerHTML = "";

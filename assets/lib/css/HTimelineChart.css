@@ -1,0 +1,228 @@
+@charset "UTF-8";
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* 챠트 생성 css */
+.timeline-chart-container {
+  position: absolute;
+  top: 0;
+  left: 1px;
+  right: 1px;
+  bottom: 0;
+}
+/* 스크롤바 위치 지정을 위해 스크롤바 핸들러의 너비 (111px)만큼 왼쪽으로 이동 */
+.costom-scrollbar-wrapper {
+  position: absolute;
+  left: 111px;
+  right: 0;
+  bottom: 45px;
+}
+.noUi-horizontal {
+  height: 8px;
+}
+.noUi-target {
+  background: none;
+  border-radius: 8px;
+  border: none;
+  box-shadow: none;
+}
+/* 스크롤바 위치 지정을 위해 스크롤바 핸들러의 너비 (111px)만큼 왼쪽으로 당기고, padding값으로 너비 추가 */
+.noUi-base .slider-track-bg {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -111px;
+  width: 100%;
+  height: 100%;
+  box-sizing: content-box;
+  padding-left: 111px;
+  background: url("/img/bg-scrollbar-track.png") repeat-x 0 0;
+}
+.noUi-horizontal .noUi-handle {
+  width: 111px;
+  height: 16px;
+  background: rgb(52, 96, 149);
+  background: -moz-linear-gradient(0deg, rgba(52, 96, 149, 1) 0%, rgba(68, 124, 193, 1) 100%);
+  background: -webkit-linear-gradient(0deg, rgba(52, 96, 149, 1) 0%, rgba(68, 124, 193, 1) 100%);
+  background: linear-gradient(0deg, rgba(52, 96, 149, 1) 0%, rgba(68, 124, 193, 1) 100%);
+  outline: 0;
+  border: 0;
+  box-shadow: 1px 1px 0 0 rgba(255, 255, 255, 0.12) inset, 1px 1px 1px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 1px;
+  top: -4px;
+  right: 0;
+}
+.noUi-handleIcon {
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  width: 1px;
+  height: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.noUi-handleIcon:before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  width: 1px;
+  height: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.noUi-handleIcon:after {
+  content: "";
+  position: absolute;
+  left: -3px;
+  width: 1px;
+  height: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.noUi-horizontal .noUi-handle:before,
+.noUi-horizontal .noUi-handle:after {
+  display: none;
+}
+
+#timelineChart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 220px;
+}
+.timeline-chart-container .timeline-chart-title {
+  position: absolute;
+  top: 10px;
+  /*
+  top: 20px;
+  left: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #448aff;
+  */
+}
+.timeline-chart-container .timelineChartContents {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  min-width: 100%;
+}
+.timeline-chart-container .timelineChartContents .tick-x-axis-line {
+  position: absolute;
+  left: 0;
+  bottom: 150px;
+  height: 1px;
+  background: black;
+  min-width: 100%;
+}
+.timeline-chart-container .timelineChartContents .node-wrapper {
+  position: absolute;
+  bottom: 48px;
+  left: 0;
+  height: 150px;
+}
+.timeline-chart-container .timelineChartContents .node-wrapper .tick-y-axis-line {
+  position: absolute;
+  top: 58px;
+  left: -1;
+  bottom: 0;
+  width: 0px;
+  background: #888888;
+  height: 68px;
+  width: 1px;
+}
+
+.timeline-chart-container .timelineChartContents .node-wrapper.long .tick-y-axis-line {
+  height: 144px;
+}
+.timeline-chart-container .node-info {
+  position: absolute;
+  top: 120px;
+  left: -22px;
+  width: 400px;
+  padding: 0.6em;
+  border-radius: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  z-index: 1;
+  cursor: pointer;
+}
+.timeline-chart-container .timelineChartContents .node-wrapper.long .node-info {
+  top: 195px;
+}
+.timeline-chart-container .node-info {
+  font-size: 10px;
+}
+.timeline-chart-container .node-info .title-text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.timeline-chart-container .node-info .title-text:hover {
+  text-decoration: underline;
+}
+
+.timeline-chart-container .timelineChartContents .node-wrapper .node-time-skip-tick {
+  text-align: center;
+  position: absolute;
+  bottom: 95px;
+  left: 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+}
+.timeline-chart-container .timelineChartContents .node-wrapper .node-time-skip-tick .ico {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 9px;
+  background: #888888;
+  margin: 0 3px;
+}
+.timeline-chart-container .timelineChartContents .node-wrapper .node-ico {
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+}
+.timeline-chart-container .timelineChartContents .node-wrapper.selected .node-info {
+  background-color: #ebebeb;
+  text-shadow: none;
+  color: #3d3d3d;
+}
+.timeline-chart-container .timelineChartContents .node-wrapper .status-ico {
+  position: absolute;
+  left: -7px;
+  bottom: 0;
+  font-size: 12px;
+  height: 104px;
+  top: 65px;
+  display: flex;
+  align-items: self-start;
+}

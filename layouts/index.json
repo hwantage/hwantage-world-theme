@@ -1,17 +1,19 @@
 [
- {{ range $index, $page := .Site.Pages }}
- {{- if ne $page.Type "json" -}}
- {{- if and $index (gt $index 0) -}},{{- end }}
- {
- "permalink": "{{ $page.Permalink }}",
- "title": "{{ htmlEscape $page.Title}}",
- "tags": [{{ range $tindex, $tag := $page.Params.tags }}{{ if $tindex }}, {{ end }}"{{ $tag| htmlEscape }}"{{ end }}],
- "description": "{{ htmlEscape .Description}}",
- "contents": {{$page.Plain | jsonify}},
- "type": "{{$page.Type}}"
- }
- {{- end -}}
- {{- end -}}
+  {{ $posts := where .Site.Pages "Type" "posts" }}
+  {{ $postsWithDate := where $posts ".Params.date" "!=" nil }}
+  {{ $sortedPosts := sort $postsWithDate ".Params.date" }}
+  {{ range $index, $page := $sortedPosts }}
+    {{- if and $index (gt $index 0) -}},{{- end }}
+    {
+      "id": "{{ $index }}",
+	  "permalink": "{{ $page.Permalink }}",
+      "title": "{{ htmlEscape $page.Title}}",
+      "tags": [{{ range $tindex, $tag := $page.Params.tags }}{{ if $tindex }}, {{ end }}"{{ $tag| htmlEscape }}"{{ end }}],
+      "description": "{{ htmlEscape .Description}}",
+      "category": "{{$page.Params.categories}}",
+      "contents": {{$page.Plain | jsonify}},
+      "date": "{{ dateFormat "2006-01-02 15:04:05" $page.Params.date }}",
+      "type": "{{$page.Type}}"
+    }
+  {{ end }}
 ]
- 
- 

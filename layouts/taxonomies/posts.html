@@ -1,0 +1,88 @@
+{{ define "main" }} 
+
+<div class="flex flex-col gap-1">
+  <h1 class="title-small">
+    {{ if .Params.header }}
+      {{ .Params.header }}
+    {{ else }}
+      {{ .Title }}
+    {{ end }}
+  </h1>
+
+  {{ with .Content }}
+    {{ . }}
+  {{ end }}
+</div>
+
+{{ $cssCopy := resources.Get "lib/css/nouislider.css" | minify}}
+<link rel="stylesheet" type="text/css" href="{{ $cssCopy.RelPermalink }}?{{ now.Unix }}" />
+{{ $cssCopy := resources.Get "lib/css/HTimelineChart.css" | minify}}
+<link rel="stylesheet" type="text/css" href="{{ $cssCopy.RelPermalink }}?{{ now.Unix }}" />
+<style>
+  #timelineWrapper {
+	position: relative;
+	width: 100%;
+	height: 350px;
+  overflow: hidden;
+  }
+</style>
+<div id="timelineWrapper" class="timeline"></div>
+
+<div>Post List</div>
+<section class="py-2 flex flex-col gap-10">
+  <ul class="taxonomy-list">
+    {{ range $index, $pages := .Pages }} 
+      <li>
+        <a href=" {{ .Permalink }} " target="_blank">
+          {{ .Title }} <span style="font-size:8pt; color:gray;">({{ range $cindex, $category := .Params.categories }}{{ if $cindex }}, {{ end }}{{ $category }}{{ end }})</span>
+        </a>
+      </li>
+    {{ end }}
+  </ul>
+</section>
+
+{{ $jsCopy := resources.Get "lib/timeline_data.js" | minify }}
+<script src="{{ $jsCopy.RelPermalink }}"></script>
+{{ $jsCopy := resources.Get "lib/d3.min.js" }}
+<script src="{{ $jsCopy.RelPermalink }}"></script>
+{{ $jsCopy := resources.Get "lib/underscore-min.js" }}
+<script src="{{ $jsCopy.RelPermalink }}"></script>
+{{ $jsCopy := resources.Get "lib/nouislider.js" | minify }}
+<script src="{{ $jsCopy.RelPermalink }}"></script>
+{{ $jsCopy := resources.Get "lib/moment.js" | minify }}
+<script src="{{ $jsCopy.RelPermalink }}"></script>
+{{ $jsCopy := resources.Get "lib/moment-with-locales.js" | minify }}
+<script src="{{ $jsCopy.RelPermalink }}"></script>
+{{ $jsCopy := resources.Get "lib/HTimelineChart.js" }}
+<script src="{{ $jsCopy.RelPermalink }}"></script>
+<script>
+  // 이미지 경로
+  var defaultImgRoot = "/img/";
+
+  moment.locale("ko");
+
+  window.onload = function(){
+    var timeline = HTimelineChart.makeChart("timelineWrapper", {
+      ChartType: "TimeLine",
+      ChartTitle: "Post Timeline", // 챠트 상단 타이틀 설정
+      TimeSkipInterval: 1440, // 분단위 60*24
+      TimeSkipTickInterval: 200, // TimeSkipTick 간격
+      TickInterval: 200, // 노드사이 간격
+      DateFormatType: "normal", // normal/after/before
+      ChartData: timelineData,
+      Onload: function (chart) {
+        //console.log('chart create.', chart);
+      },
+      NodeActive: function (node, nodeData) {
+        console.log(node);
+        console.log(nodeData);
+      },
+    });
+
+    timeline.scrollToTarget(timelineData.length - 1); // 챠트 포커스(스크롤) 이동
+
+  };
+</script>
+
+{{ end }}
+
