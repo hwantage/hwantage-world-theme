@@ -61,7 +61,9 @@
 
   moment.locale("ko");
 
-  window.onload = function(){
+  fetch('/index.json')
+  .then(response => response.json())
+  .then(timelineData => {
     var timeline = HTimelineChart.makeChart("timelineWrapper", {
       ChartType: "TimeLine",
       ChartTitle: "Post Timeline", // 챠트 상단 타이틀 설정
@@ -81,7 +83,9 @@
 
     timeline.scrollToTarget(timelineData.length - 1); // 챠트 포커스(스크롤) 이동
 
-  };
+  })
+  .catch(error => console.error('데이터를 불러오는 중 에러 발생:', error));
+
 </script>
 
 {{ end }}

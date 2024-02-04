@@ -12,7 +12,7 @@ HTimelineChart.makeChart = function (contaner, options, data) {
   return HTimelineChart[options["ChartType"]](contaner, options, data);
 };
 
-// process tree
+// timeline chaart
 HTimelineChart.TimeLine = function (contaner, options) {
   var CHARTOBJ = this; // HTimelineCharts
   var TIMELINECHARTOBJ = CHARTOBJ.TimeLine; // HTimelineCharts.TimeLine
