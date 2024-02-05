@@ -143,6 +143,7 @@ dd {
   bottom: 48px;
   left: 0;
   height: 150px;
+  cursor: move;
 }
 .timeline-chart-container .timelineChartContents .node-wrapper .tick-y-axis-line {
   position: absolute;
@@ -151,12 +152,12 @@ dd {
   bottom: 0;
   width: 0px;
   background: #888888;
-  height: 68px;
+  height: 62px;
   width: 1px;
 }
 
 .timeline-chart-container .timelineChartContents .node-wrapper.long .tick-y-axis-line {
-  height: 144px;
+  height: 138px;
 }
 .timeline-chart-container .node-info {
   position: absolute;
@@ -218,11 +219,15 @@ dd {
 }
 .timeline-chart-container .timelineChartContents .node-wrapper .status-ico {
   position: absolute;
-  left: -7px;
+  left: -5px;
   bottom: 0;
   font-size: 12px;
   height: 104px;
-  top: 65px;
+  top: 58px;
   display: flex;
-  align-items: self-start;
+  align-items: center;
+}
+
+.timeline-chart-container .timelineChartContents .node-wrapper.long .status-ico {
+  top: 133px;
 }

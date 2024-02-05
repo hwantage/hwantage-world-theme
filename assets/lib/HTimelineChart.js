@@ -375,18 +375,12 @@ HTimelineChart.TimeLine = function (contaner, options) {
     var x = e.pageX - timelineWrapper.offsetLeft;
     var walk = (x - startX) * 0.1; // Adjust the scroll speed
 
-    // 기존 scrollLeft에서 마우스 이동에 따라 움직인 만큼만 이동하도록 조정
     var newScrollLeft = scrollLeft - walk;
     var totalWidth = timelineWrapper.scrollWidth;
-
-    // slider의 현재 값 가져오기
     var oldPos = parseFloat(slider.node().noUiSlider.get());
     var newPos = ((newScrollLeft - scrollLeft) / totalWidth) * 100;
 
-    // 새로운 값을 설정할 때 기존의 포지션과의 차이만큼만 설정
     slider.node().noUiSlider.set(oldPos + newPos);
-
-    // 새로운 scrollLeft 값으로 업데이트
     scrollLeft = newScrollLeft;
   });
 
