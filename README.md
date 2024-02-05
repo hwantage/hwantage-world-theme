@@ -24,7 +24,8 @@ Based on **Lowkey Hugo theme**
 * robots.txt 내용 변경
 * 포스트 리스트에서 포스트 제목 크기 조정
 * 포스트 리스트에서 날짜와 Read more 한줄로 표기되도록 변경
-* 날짜 출력 포맷 변경 (2024-01-27)
+* 날짜 출력 포맷 변경 (YYYY-MM-DD)
+* 블로그 포스트 타임라인 기능 적용
 
 ## Blog link
 

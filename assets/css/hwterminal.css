@@ -1,8 +1,16 @@
-.close-terminal {display:inline-block;*display:inline;cursor:pointer;}
-.close-terminal:after {display: inline-block;content: "\00d7"; font-size:35pt;color:#F9B339;}
+.close-terminal {
+  display: inline-block;
+  cursor: pointer;
+}
+.close-terminal:after {
+  display: inline-block;
+  content: "\00d7";
+  font-size: 35pt;
+  color: #f9b339;
+}
 /* https://jsfiddle.net/heeehong/2dvL65ao/9/ */
 .term-info {
-	color:#919191;
+  color: #919191;
 }
 .terminal-content {
   position: fixed;
@@ -10,7 +18,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0,0,0,.9);
+  background-color: rgba(0, 0, 0, 0.9);
   display: block;
   height: 100%;
   z-index: 9;
@@ -18,7 +26,7 @@
 
 .terminal-item {
   margin: 20px auto;
-  width:800px;
+  max-width: 800px;
 }
 
 @keyframes showTerm {
