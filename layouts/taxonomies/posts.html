@@ -67,7 +67,7 @@
     var timeline = HTimelineChart.makeChart("timelineWrapper", {
       ChartType: "TimeLine",
       ChartTitle: "Post Timeline", // 챠트 상단 타이틀 설정
-      TimeSkipInterval: 1440, // 분단위 60*24
+      TimeSkipInterval: 0, // milliseconds (1시간=3600000)
       TimeSkipTickInterval: 200, // TimeSkipTick 간격
       TickInterval: 200, // 노드사이 간격
       DateFormatType: "normal", // normal/after/before
@@ -75,9 +75,10 @@
       Onload: function (chart) {
         //console.log('chart create.', chart);
       },
-      NodeActive: function (node, nodeData) {
-        console.log(node);
-        console.log(nodeData);
+      NodeClick: function (node, nodeData) {
+        //console.log(node);
+        //console.log(nodeData);
+        window.open(nodeData["permalink"], "_blank");
       },
     });
 

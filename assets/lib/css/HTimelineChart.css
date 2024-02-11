@@ -61,6 +61,7 @@ dd {
   box-sizing: content-box;
   padding-left: 111px;
   background: url("/img/bg-scrollbar-track.png") repeat-x 0 0;
+  /*<a href="https://kr.freepik.com/search?format=search&last_filter=page&last_value=4&page=4&query=%ED%88%AC%EB%AA%85%ED%95%9C+png+%ED%8C%8C%EC%9D%BC+flag&type=icon#uuid=a9bab1f0-0969-45e9-9c57-7e6d39ee24bb">Pixel perfect 제작 아이콘</a>*/
 }
 .noUi-horizontal .noUi-handle {
   width: 111px;
@@ -147,7 +148,7 @@ dd {
 }
 .timeline-chart-container .timelineChartContents .node-wrapper .tick-y-axis-line {
   position: absolute;
-  top: 58px;
+  top: 50px;
   left: -1;
   bottom: 0;
   width: 0px;
@@ -161,7 +162,7 @@ dd {
 }
 .timeline-chart-container .node-info {
   position: absolute;
-  top: 120px;
+  top: 110px;
   left: -22px;
   width: 400px;
   padding: 0.6em;
@@ -223,7 +224,7 @@ dd {
   bottom: 0;
   font-size: 12px;
   height: 104px;
-  top: 58px;
+  top: 48px;
   display: flex;
   align-items: center;
 }

@@ -106,8 +106,8 @@ HTimelineChart.TimeLine = function (contaner, options) {
 
   // 노드 클릭
   function nodeClick(data) {
-    // 선택한 항목 새창 열기
-    window.open(data["permalink"], "_blank");
+    // NodeClick 콜백 생성
+    options.NodeClick && options.NodeClick(data["id"], data);
   }
 
   // 노드생성
@@ -193,8 +193,7 @@ HTimelineChart.TimeLine = function (contaner, options) {
         if (data["showDateStr"] != "Invalid date") return data["showDateStr"];
       })
       .html(function (data) {
-        if (data["showDateStr"] != "Invalid date")
-          return moment(moment(data["showDateStr"])).from(currentDate, false) + "<br><span class='title-text'>" + data["title"] + "</span>";
+        if (data["showDateStr"] != "Invalid date") return data["showDateStr"] + "<br><span class='title-text'>" + data["title"] + "</span>";
         else return null;
       })
       .on("mouseover", nodeMouseOver)
@@ -327,7 +326,7 @@ HTimelineChart.TimeLine = function (contaner, options) {
   // 노드 포커싱
   TIMELINECHARTOBJ["scrollToTarget"] = function (id) {
     var pos = parseInt(d3.select("#timelineNode-" + id).style("left"));
-    slider.node().noUiSlider.set(getPosToValue(pos));
+    slider && slider.node().noUiSlider.set(getPosToValue(pos));
     d3.select("#timelineNode-" + id + " .node-ico").node();
   };
 
@@ -370,7 +369,7 @@ HTimelineChart.TimeLine = function (contaner, options) {
   });
 
   timelineWrapper.addEventListener("mousemove", function (e) {
-    if (!isMouseDown) return;
+    if (!isMouseDown || !slider) return;
     e.preventDefault();
     var x = e.pageX - timelineWrapper.offsetLeft;
     var walk = (x - startX) * 0.1; // Adjust the scroll speed
