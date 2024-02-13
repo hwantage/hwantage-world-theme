@@ -1,4 +1,3 @@
 User-agent: *
-Allow: /
-
+Disallow:
 Sitemap: https://hwantage.github.io/sitemap.xml
