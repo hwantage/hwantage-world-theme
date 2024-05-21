@@ -10,12 +10,12 @@
   }
 </style>
 <button aria-label="Terminal mode" title="Terminal mode" onclick="loadTerminal()">
-  <span class="theme-icon2 light clickme"> {{ partial "utils/icon" "cmd_dark" }} </span>
-  <span class="theme-icon2 dark clickme"> {{ partial "utils/icon" "cmd" }} </span>
+  <span class="theme-icon2 light clickme" style="display:none"> {{ partial "utils/icon" "cmd_dark" }} </span>
+  <span class="theme-icon2 dark clickme" style="display:none"> {{ partial "utils/icon" "cmd" }} </span>
 </button>
 <button class="toggle-theme" aria-label="Toggle Theme" title="Toggle Theme" onclick="toggleTheme()">
-  <span class="theme-icon light"> {{ partial "utils/icon" "sun" }} </span>
-  <span class="theme-icon dark"> {{ partial "utils/icon" "moon" }} </span>
+  <span class="theme-icon light" style="display:none"> {{ partial "utils/icon" "sun" }} </span>
+  <span class="theme-icon dark" style="display:none"> {{ partial "utils/icon" "moon" }} </span>
 </button>
 
 <script>
